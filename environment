@@ -1,0 +1,9 @@
+# PostgreSQL
+POSTGRES_PASSWORD=password
+POSTGRES_USER=web
+POSTGRES_DATABASE=web
+POSTGRES_HOST=database
+
+# Cache setup
+REDIS_HOST=cache
+REDIS_PORT=6379

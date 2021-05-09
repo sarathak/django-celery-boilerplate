@@ -1,0 +1,13 @@
+.idea/
+venv/
+htmlcov/
+npm/
+node_modules/
+__pycache__/
+*.pyc
+Thumbs.db
+*.orig
+static_collected/
+logs/*
+.coverage
+db.sqlite3

@@ -1,0 +1,56 @@
+version: "3"
+services:
+  database:
+    image: postgres:13-alpine
+    env_file:
+      - ./environment
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: always
+  cache:
+    image: redis:6-alpine
+    restart: always
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+  web:
+    build: web
+    restart: unless-stopped
+#    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn --bind :8000 --workers 3 web.wsgi
+    env_file:
+      - ./environment
+    depends_on:
+      - cache
+      - database
+  celery:
+    build: web
+    command: ["celery", "-A", "web", "worker", "-l", "INFO"]
+    restart: unless-stopped
+    env_file:
+      - ./environment
+    depends_on:
+      - cache
+      - database
+  start:
+    build: web
+    command: ./start.sh
+    env_file:
+      - ./environment
+    volumes:
+      - static_volume:/app/static
+    depends_on:
+      - cache
+      - database
+  nginx:
+    build: nginx
+    volumes:
+      - static_volume:/app/static
+    ports:
+      - "8080:80"
+    depends_on:
+      - web
+volumes:
+  postgres-data: {}
+  redis-data: {}
+  static_volume: {}

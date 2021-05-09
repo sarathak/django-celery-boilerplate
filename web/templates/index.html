@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create order</title>
+</head>
+<body>
+
+<form method="post">
+    <ul>
+        {{ form.as_ul }}
+    </ul>
+    <button type="submit">Create order</button>
+</form>
+<style>
+    form {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 400px;
+        margin: auto;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        padding: 0;
+        margin: 0 0 15px;
+        list-style: none;
+    }
+
+    input, label {
+        display: block;
+        font-size: 18px;
+    }
+
+    button {
+        font-size: 18px;
+    }
+</style>
+</body>
+</html>

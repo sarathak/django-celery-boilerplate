@@ -1,0 +1,7 @@
+.git
+.dockerignore
+venv
+README.md
+Dockerfile
+docker-compose
+db.sqlite3
