@@ -16,7 +16,7 @@ services:
   web:
     build: web
     restart: unless-stopped
-#    command: python manage.py runserver 0.0.0.0:8000
+    container_name: order_web
     command: gunicorn --bind :8000 --workers 3 web.wsgi
     env_file:
       - ./environment
